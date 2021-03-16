@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SM64EXLC</title>
+    </head>
+    <body>
+
+<h1>Super Mario 64 EX Leopard Compiler</h1>
+<p>By Alex Free</p>
+
+<p>SM64EX is a native Super Mario 64 port derived from the decompilation of Super Mario 64. SM64EXLC is an easy to use, point and click GUI app that compiles my <a href=https://github.com/alex-free/sm64ex>SM64EX</a> fork of the original <a href=https://github.com/sm64pc/sm64ex>SM64EX</a> port on PowerPC Mac OS X Leopard into a portable <code>SM64EX.app</code> on your <code>~/Desktop</code>.</p>
+
+<p>SM64EXLC is like <a href=https://sm64pc.info/sm64nxbuilder/>sm64nxBuilder</a> but for PowerPC Mac OS X 10.5.8 instead of Windows!</p>
+
+<p><a href=https://alex-free.github.io/sm64exlc>Homepage</a> || <a href=https://github.com/alex-free/sm64ex-leopard-compiler>GitHub</a> || <a href=https://macintoshgarden.org/games/super-mario-64-ex-leopard-compiler>Macintosh Garden</a></p>
+<h2>Table Of Contents</h2>
+<ul><li><a href="#download">Download</a></li>
+<li><a href="#install">Install</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#changelog">Changlog</a></li>
+<li><a href="#bundled">Bundled Software</a></li>
+<li><a href="#license">License</a></li></ul>
+
+<a name=downloads><h2>Downloads</h2></a>
+<h3>Version 1.0 (3/16/2021)</h3>
+<p><a href=https://github.com/alex-free/sm64ex-leopard-compiler/releases/download/1.0/sm64exlc_1.0.zip>Mac OS X 10.5.8 PowerPC</a></p>
+<p><a href=https://github.com/alex-free/sm64ex-leopard-compiler/releases>All releases</a></p>
+<a name=install><h2>Install</h2></a>
+
+<p>Copy <code>SM64EX.app</code> into the <code>/Applications</code> directory. <b><code>SM64EXLC.app</code> must be in the <code>/Applications</code> directory to work</b>, you will be prompted to move it there if it is not.</p> 
+<p>The <code>SM64EX.app</code> <code>SM64EXLC.app</code> creates is however portable and works from anywhere.</p>
+
+<a name=usage><h2>Usage</h2></a>
+
+<p>Double click <code>/Applications/SM64EXLC.app</code>. A Finder window will open, allowing you to select your Super Mario 64 N64 .z64 ROM file. This is required to extract the copyrighted game assets. After selecting your rom file, the first choice you will be presented with is what is the region of the ROM you just selected. Only the original Japan and USA .z64 ROM files are supported. After that, select which branch you want to compile. A branch is essentially just a different version of source code, and in the case of the SM64EX port there are pros and cons to both branches.</p>
+
+<h3>Master Branch Pros:</h3>
+<ul><li>Vsync works if you use SDL 2 (another choice available after selecting the desired branch).</li>
+</ul>
+
+<h3>Master Branch Cons:</h3>
+<ul><li>SDL 1.2.15 support is not available.</li>
+<li>Native controller support (such as using an Xbox 360 controller driver like the <a href=https://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver>Tattiebogle</a> driver) <b>does not work.</b></li>
+<li>Some graphics issues are present that are already fixed in the Nightly branch.</li></ul>
+
+<h3>Nightly Branch Pros:</h3>
+<ul><li>SDL 1.2.15 is an available choice (after selecting the desired branch).</li>
+<li>Native controller support when using SDL 1.2.15 (such as using an Xbox 360 controller driver like the <a href=https://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver>Tattiebogle</a> driver) <b>works if you plug in the controller before launching the game.</b></li>
+<li>Some graphics issues have been fixed and or improved over the Master branch.</li></ul>
+
+<h3>Nightly Branch Cons:</h3>
+<ul><li>Vsync is broken and you will experience screen tearing.</li></ul>
+
+<p>The default option is the Master branch, and that is what I recomend due to the working Vsync when later selecting the SDL2 option. However, if you want to use a controller, select the Nightly branch!</p>
+
+<p>The next option is which SDL version you want to use. <a href=https://github.com/alex-free/leopard_sdl2.0.6>Leopard SDL 2.0.6</a> is my fork of SDL version 2.0.6.</p> 
+
+<p>If your using the Master branch and select Leopard SDL 2.0.6 VSYNC will work. If your using the Nightly branch and select SDL 1.2.15 controllers will work. These are the defaults.</p>
+
+<p>After selecting your desired SDL option, you'll be asked what OpenGL version you want to use. The default is OpenGL 1.</p>
+
+<h3>OpenGL 1 Pros:</h3>
+<ul><li>Works on all Leopard PowerPC Macs.</li></ul>
+
+<h3>OpenGL 1 Cons:</h3>
+<ul><li>Some graphics issues are present that are not when using OpenGL 2.</li></ul>
+
+<h3>OpenGL 2 Pros:</h3>
+<ul><li>Less graphics issues then when using OpenGL 1.</li>
+<li>Better performance then OpenGL 1.</li></ul>
+
+<h3>OpenGL 2 Cons:</h3>
+<ul><li><b>Does not work on most PowerPC Macs</b>, you need an OpenGL 2.1 capable GPU.</li></ul>
+
+<p>After that, a <code>Terminal.app</code> window will open and start building SM64EX to your specifications. This will take quite a while, wait for the 'ding' noise and for Terminal to say it's done building <code>SM64EX.app</code> (which will be on your desktop).</p>
+
+<p>Since <code>SM64EX.app</code> is a portable app, the save and config files are contained within the app itself. To access them, start <code>SM64EX.app</code> and select either the <code>Edit Config File</code> or <code>Open Preferences Folder</code> option.</p>
+
+<a name=changelog><h2>Changelog</h2></a>
+<ul><li>v1.0 (3/16/2021) - First release.</li></ul>
+
+<a name=bundled><h2>Bundled Software</h2></a>
+
+<p>SM64EXLC contains <a href=https://www.libsdl.org/release/>SDL 1.2.15</a>, <a href=https://github.com/alex-free/leopard_sdl2.0.6>Leopard SDL 2.0.6</a>, and it's own internal <a href=https://github.com/macports/>MacPorts</a>/<a href=https://github.com/kencu/LeopardPorts>LeopardPorts</a> installation, with all the software except SM64EX itself already compiled (see the list of MacPorts/LeopardPorts software installed below) due to the need of a ROM file to extract the copyrighted game assets.</p> 
+
+<pre><code>
+bzip2 version 1.0.8_0
+cctools version 949.0.1_0
+db48 version 4.8.30_4+java
+expat version 2.2.10_0
+gcc7 version 7.5.0_2
+gcc_select version 0.1_9
+gdbm version 1.19_0
+gettext version 0.19.8.1_2
+glew version 2.2.0_0
+gmake version 4.3_0
+gmp version 6.2.1_0
+gperf version 3.1_0
+i686-w64-mingw32-binutils version 2.36.1_0
+i686-w64-mingw32-crt version 8.0.0_0
+i686-w64-mingw32-gcc-bootstrap version 10.2.0_0
+i686-w64-mingw32-gcc-nothreads version 10.2.0_0
+i686-w64-mingw32-headers version 8.0.0_0
+isl version 0.22.1_0
+ld64 version 3_3+ld64_127
+ld64-127 version 127.2_14+llvm33
+libedit version 20210216-3.1_0
+libffi version 3.3_1
+libgcc version 3.0_0
+libgcc7 version 7.5.0_0
+libiconv version 1.16_1
+libmacho-headers version 949.0.1_0
+libmpc version 1.2.1_0
+libunwind-headers version 5.0.1_0
+llvm-3.3 version 3.3_11
+llvm_select version 2_0
+lzip version 1.22_0
+mpfr version 4.1.0_0
+ncurses version 6.2_1
+openssl version 1.1.1j_0
+perl5 version 5.28.3_0+perl5_28
+perl5.28 version 5.28.3_1
+pkgconfig version 0.29.2_0
+python3_select version 0.0_2
+python39 version 3.9.2_0
+python_select version 0.3_9
+readline version 8.1.000_0
+sqlite3 version 3.34.1_0
+xz version 5.2.5_0
+zlib version 1.2.11_0</code></pre>
+
+<a name=license><h2>License</h2></a>
+<p>This license is distributed with SM64EXLC, it is <b>only applicable to SM64EXLC itself and not to the SM64EX port or internal MacPorts installation/dependencies</b>.</p>
+<pre><code>BSD 3-Clause License
+
+Copyright (c) 2021, Alex Free
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+* Neither the name of the copyright holder nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</code></pre>
+

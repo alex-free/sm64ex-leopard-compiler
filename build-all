@@ -1,0 +1,67 @@
+#!/bin/bash
+
+
+if [[ $EUID -ne 0 ]]; then
+    echo "You need to run "$0" as root or with sudo to continue"
+	exit 1
+fi
+
+app=/Applications/SM64EXLC.app
+
+if [ "$1" = "--everything" ]; then
+    rm -rf $app
+    cp -rv SM64EXLC.app /Applications
+    cp -v applet.icns $app/Contents/Resources/
+    cp -rv SM64EX.app $app
+    rm -rf build /usr/leopardports
+    mkdir build
+
+    cp -rv sm64ex-master sm64ex-nightly $app
+    cp -rv macports-base leopard_sdl2.0.6 sdl-1.2.15 build
+    cp -rv leopardports $app/ 
+
+    cd macports-base
+    export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+    MP_PREFIX=$app
+    ./configure --prefix=$MP_PREFIX --with-applications-dir=$MP_PREFIX/Applications --without-startupitems
+    make
+    make install
+    cd ../../
+
+    export PATH=$app/bin:$PATH
+    cp -v sources.conf $app/etc/macports/
+    cd /usr/leopardports
+    portindex
+    port selfupdate
+    yes | port -d install glew gmake python39 i686-w64-mingw32-gcc-nothreads pkgconfig gcc7
+    port select --set gcc mp-gcc7
+    port select --set python python39
+    port select --set python3 python39
+    
+    port select --set gcc gcc40
+    cd build/sdl-1.2.15
+    ./configure --disable-shared --enable-static --without-x --prefix=$app CPPFLAGS='-I/Applications/SM64EXLC.app/include' LDFLAGS='-L/Applications/SM64EXLC.app/lib'
+    make install
+    cd ../
+
+    cd leopard_sdl2.0.6
+    ./configure --disable-shared --enable-static --without-x --disable-joystick --disable-haptic --prefix=$app CPPFLAGS='-I/Applications/SM64EXLC.app/include' LDFLAGS='-L/Applications/SM64EXLC.app/lib'
+    make install
+    cd ..
+
+    port select --set gcc mp-gcc7
+    cp -v compile $app/
+    chmod -R 777 $app
+elif [ "$1" = "--applescriptonly" ]; then
+    cp -rv SM64EXLC.app /Applications
+    cp -v applet.icns $app/Contents/Resources/
+    cp -rv SM64EX.app $app
+    cp -v compile $app/
+    chmod -R 777 $app
+else
+    echo "Usage:"
+    echo ""$0" --everything		Compile and make a completely new SM64EXLC.app"
+    echo ""$0" --applescriptonly	Copy over only updated AppleScript code" 
+fi
+
+

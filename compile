@@ -1,0 +1,33 @@
+#!/bin/bash
+set -e
+app=/Applications/SM64EXLC.app
+# 1 is branch 2 is rom 3 is command 4 is region
+export PATH=$app/bin:$PATH
+rm -rf $app/build ~/Desktop/SM64EXLC.app
+mkdir $app/build
+cp -rv $app/sm64ex-"$1" $app/build/sm64ex-$1 
+if [ "$4" = "us" ]; then
+    cp -v "$2" $app/build/sm64ex-$1/baserom.us.z64
+elif [ "$4" = "jp" ]; then
+    cp -v "$2" $app/build/sm64ex-$1/baserom.jp.z64
+else
+    echo "$4 is not a supported version! Bailing..."
+    exit 1
+fi
+cd $app/build/sm64ex-$1
+$3
+cd $app/build/sm64ex-$1/build/*_pc; 
+cp -v $app/lib/libGLEW.2.2.0.dylib .
+cp -v $app/lib/libgcc/libgcc_s.1.dylib .
+install_name_tool -change $app/lib/libGLEW.2.2.0.dylib @executable_path/libGLEW.2.2.0.dylib sm64.*
+install_name_tool -change $app/lib/libgcc/libgcc_s.1.dylib @executable_path/libgcc_s.1.dylib sm64.*
+cp -rv $app/SM64EX.app ~/Desktop/SM64EX.app
+cp -v libgcc_s.1.dylib ~/Desktop/SM64EX.app/
+cp -v libGLEW.2.2.0.dylib ~/Desktop/SM64EX.app/
+cp -v sm64.* ~/Desktop/SM64EX.app/
+cp -v $app/Contents/Resources/applet.icns ~/Desktop/SM64EX.app/Contents/Resources/
+chmod -R 777 ~/Desktop/SM64EX.app
+rm -rf $app/build
+afplay /System/Library/Sounds/Glass.aiff
+echo
+echo "Done! Your SM64EX.app has been built and is now on your Desktop."
