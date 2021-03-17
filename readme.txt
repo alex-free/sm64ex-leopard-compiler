@@ -1,4 +1,5 @@
 Super Mario 64 EX Leopard Compiler
+
 By Alex Free
 
 SM64EX is a native Super Mario 64 port derived from the decompilation of Super Mario 64. SM64EXLC is an easy to use, point and click GUI app that compiles my SM64EX fork of the original SM64EX port on PowerPC Mac OS X Leopard into a portable SM64EX.app on your ~/Desktop.
@@ -8,6 +9,7 @@ SM64EXLC is like sm64nxBuilder but for PowerPC Mac OS X 10.5.8 instead of Window
 Homepage || GitHub || Macintosh Garden
 
 Table Of Contents
+
 Download
 Install
 Usage
@@ -15,55 +17,68 @@ Changlog
 Bundled Software
 License
 Downloads
-Version 1.0 (3/16/2021)
+
+Version 1.0.1 (3/16/2021)
+
 Mac OS X 10.5.8 PowerPC
 
 All releases
 
 Install
-Copy SM64EX.app into the /Applications directory. SM64EXLC.app must be in the /Applications directory to work, you will be prompted to move it there if it is not.
+
+Copy SM64EXLC.app into the /Applications directory. SM64EXLC.app must be in the /Applications directory to work, you will be prompted to move it there if it is not.
 
 The SM64EX.app SM64EXLC.app creates is however portable and works from anywhere.
 
 Usage
-Double click /Applications/SM64EXLC.app. A Finder window will open, allowing you to select your Super Mario 64 N64 .z64 ROM file. This is required to extract the copyrighted game assets. After selecting your rom file, the first choice you will be presented with is what is the region of the ROM you just selected. Only the original Japan and USA .z64 ROM files are supported. After that, select which branch you want to compile. A branch is essentially just a different version of source code, and in the case of the SM64EX port there are pros and cons to both branches.
+
+Double click /Applications/SM64EXLC.app. A Finder window will open, allowing you to select your Super Mario 64 N64 .z64 ROM file. This is required to extract the copyrighted game assets. After selecting your rom file, SM64EXLC will verify that the ROM file is either the original Japan or USA release. After that, select which branch you want to compile. A branch is essentially just a different version of source code, and in the case of the SM64EX port there are pros and cons to both branches.
 
 Master Branch Pros:
-Vsync works if you use SDL 2 (another choice available after selecting the desired branch).
+
+Vsync works.
 Master Branch Cons:
+
 SDL 1.2.15 support is not available.
 Native controller support (such as using an Xbox 360 controller driver like the Tattiebogle driver) does not work.
 Some graphics issues are present that are already fixed in the Nightly branch.
 Nightly Branch Pros:
+
 SDL 1.2.15 is an available choice (after selecting the desired branch).
 Native controller support when using SDL 1.2.15 (such as using an Xbox 360 controller driver like the Tattiebogle driver) works if you plug in the controller before launching the game.
 Some graphics issues have been fixed and or improved over the Master branch.
 Nightly Branch Cons:
+
 Vsync is broken and you will experience screen tearing.
 The default option is the Master branch, and that is what I recomend due to the working Vsync when later selecting the SDL2 option. However, if you want to use a controller, select the Nightly branch!
 
 The next option is which SDL version you want to use. Leopard SDL 2.0.6 is my fork of SDL version 2.0.6.
 
-If your using the Master branch and select Leopard SDL 2.0.6 VSYNC will work. If your using the Nightly branch and select SDL 1.2.15 controllers will work. These are the defaults.
-
 After selecting your desired SDL option, you'll be asked what OpenGL version you want to use. The default is OpenGL 1.
 
 OpenGL 1 Pros:
+
 Works on all Leopard PowerPC Macs.
 OpenGL 1 Cons:
+
 Some graphics issues are present that are not when using OpenGL 2.
 OpenGL 2 Pros:
+
 Less graphics issues then when using OpenGL 1.
 Better performance then OpenGL 1.
 OpenGL 2 Cons:
+
 Does not work on most PowerPC Macs, you need an OpenGL 2.1 capable GPU.
 After that, a Terminal.app window will open and start building SM64EX to your specifications. This will take quite a while, wait for the 'ding' noise and for Terminal to say it's done building SM64EX.app (which will be on your desktop).
 
 Since SM64EX.app is a portable app, the save and config files are contained within the app itself. To access them, start SM64EX.app and select either the Edit Config File or Open Preferences Folder option.
 
 Changelog
+
+v1.0.1 (3/17/2021) - Added auto detection of ROM file regions and verification.
 v1.0 (3/16/2021) - First release.
 Bundled Software
+
 SM64EXLC contains SDL 1.2.15, Leopard SDL 2.0.6, and it's own internal MacPorts/LeopardPorts installation, with all the software except SM64EX itself already compiled (see the list of MacPorts/LeopardPorts software installed below) due to the need of a ROM file to extract the copyrighted game assets.
 
 
@@ -112,34 +127,30 @@ sqlite3 version 3.34.1_0
 xz version 5.2.5_0
 zlib version 1.2.11_0
 License
+
 This license is distributed with SM64EXLC, it is only applicable to SM64EXLC itself and not to the SM64EX port or internal MacPorts installation/dependencies.
 
-BSD 3-Clause License
+This is free and unencumbered software released into the public domain.
 
-Copyright (c) 2021, Alex Free
-All rights reserved.
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
 
-* Redistributions of source code must retain the above copyright notice, this
-  list of conditions and the following disclaimer.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
 
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-* Neither the name of the copyright holder nor the names of its
-  contributors may be used to endorse or promote products derived from
-  this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+For more information, please refer to http://unlicense.org

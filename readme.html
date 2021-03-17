@@ -22,20 +22,20 @@
 <li><a href="#license">License</a></li></ul>
 
 <a name=downloads><h2>Downloads</h2></a>
-<h3>Version 1.0 (3/16/2021)</h3>
-<p><a href=https://github.com/alex-free/sm64ex-leopard-compiler/releases/download/1.0/sm64exlc_1.0.zip>Mac OS X 10.5.8 PowerPC</a></p>
+<h3>Version 1.0.1 (3/16/2021)</h3>
+<p><a href=https://github.com/alex-free/sm64ex-leopard-compiler/releases/download/1.0.1/sm64exlc_1.0.1.zip>Mac OS X 10.5.8 PowerPC</a></p>
 <p><a href=https://github.com/alex-free/sm64ex-leopard-compiler/releases>All releases</a></p>
 <a name=install><h2>Install</h2></a>
 
-<p>Copy <code>SM64EX.app</code> into the <code>/Applications</code> directory. <b><code>SM64EXLC.app</code> must be in the <code>/Applications</code> directory to work</b>, you will be prompted to move it there if it is not.</p> 
+<p>Copy <code>SM64EXLC.app</code> into the <code>/Applications</code> directory. <b><code>SM64EXLC.app</code> must be in the <code>/Applications</code> directory to work</b>, you will be prompted to move it there if it is not.</p> 
 <p>The <code>SM64EX.app</code> <code>SM64EXLC.app</code> creates is however portable and works from anywhere.</p>
 
 <a name=usage><h2>Usage</h2></a>
 
-<p>Double click <code>/Applications/SM64EXLC.app</code>. A Finder window will open, allowing you to select your Super Mario 64 N64 .z64 ROM file. This is required to extract the copyrighted game assets. After selecting your rom file, the first choice you will be presented with is what is the region of the ROM you just selected. Only the original Japan and USA .z64 ROM files are supported. After that, select which branch you want to compile. A branch is essentially just a different version of source code, and in the case of the SM64EX port there are pros and cons to both branches.</p>
+<p>Double click <code>/Applications/SM64EXLC.app</code>. A Finder window will open, allowing you to select your Super Mario 64 N64 .z64 ROM file. This is required to extract the copyrighted game assets. After selecting your rom file, SM64EXLC will verify that the ROM file is either the original Japan or USA release. After that, select which branch you want to compile. A branch is essentially just a different version of source code, and in the case of the SM64EX port there are pros and cons to both branches.</p>
 
 <h3>Master Branch Pros:</h3>
-<ul><li>Vsync works if you use SDL 2 (another choice available after selecting the desired branch).</li>
+<ul><li>Vsync works.</li>
 </ul>
 
 <h3>Master Branch Cons:</h3>
@@ -54,8 +54,6 @@
 <p>The default option is the Master branch, and that is what I recomend due to the working Vsync when later selecting the SDL2 option. However, if you want to use a controller, select the Nightly branch!</p>
 
 <p>The next option is which SDL version you want to use. <a href=https://github.com/alex-free/leopard_sdl2.0.6>Leopard SDL 2.0.6</a> is my fork of SDL version 2.0.6.</p> 
-
-<p>If your using the Master branch and select Leopard SDL 2.0.6 VSYNC will work. If your using the Nightly branch and select SDL 1.2.15 controllers will work. These are the defaults.</p>
 
 <p>After selecting your desired SDL option, you'll be asked what OpenGL version you want to use. The default is OpenGL 1.</p>
 
@@ -77,7 +75,8 @@
 <p>Since <code>SM64EX.app</code> is a portable app, the save and config files are contained within the app itself. To access them, start <code>SM64EX.app</code> and select either the <code>Edit Config File</code> or <code>Open Preferences Folder</code> option.</p>
 
 <a name=changelog><h2>Changelog</h2></a>
-<ul><li>v1.0 (3/16/2021) - First release.</li></ul>
+<ul><li>v1.0.1 (3/17/2021) - Added auto detection of ROM file regions and verification.</li>
+<li>v1.0 (3/16/2021) - First release.</li></ul>
 
 <a name=bundled><h2>Bundled Software</h2></a>
 
@@ -131,33 +130,28 @@ zlib version 1.2.11_0</code></pre>
 
 <a name=license><h2>License</h2></a>
 <p>This license is distributed with SM64EXLC, it is <b>only applicable to SM64EXLC itself and not to the SM64EX port or internal MacPorts installation/dependencies</b>.</p>
-<pre><code>BSD 3-Clause License
+<pre><code>This is free and unencumbered software released into the public domain.
 
-Copyright (c) 2021, Alex Free
-All rights reserved.
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
 
-* Redistributions of source code must retain the above copyright notice, this
-  list of conditions and the following disclaimer.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
 
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-* Neither the name of the copyright holder nor the names of its
-  contributors may be used to endorse or promote products derived from
-  this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</code></pre>
+For more information, please refer to http://unlicense.org</code></pre>
 
