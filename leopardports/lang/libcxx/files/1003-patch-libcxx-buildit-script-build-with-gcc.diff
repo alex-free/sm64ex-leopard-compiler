@@ -1,0 +1,19 @@
+--- libcxx-5.0.1.src/lib/buildit.orig	2018-12-23 23:17:35.000000000 -0500
++++ libcxx-5.0.1.src/lib/buildit	2018-12-23 23:20:42.000000000 -0500
+@@ -71,6 +71,7 @@
+             -install_name /usr/lib/libc++.1.dylib \
+             -Wl,-reexport_library,${LIBCXXABI_DYLIB_PATH} \
+             -Wl,-unexported_symbols_list,libc++unexp.exp  \
++            -Wl,-no_compact_unwind \
+-            /usr/lib/libSystem.B.dylib /usr/lib/libgcc_s.1.dylib"
++            /usr/lib/libSystem.B.dylib ${PREFIX}/lib/libgcc/libgcc_s.1.dylib -lgcc"
+     else
+         LDSHARED_FLAGS="-o libc++.1.dylib \
+@@ -83,6 +84,7 @@
+             -Wl,-reexport_library,${LIBCXXABI_DYLIB_PATH} \
+             -Wl,-reexported_symbols_list,libc++abi2.exp \
+             -Wl,-force_symbols_not_weak_list,notweak.exp \
++            -Wl,-no_compact_unwind \
+             -Wl,-force_symbols_weak_list,weak.exp"
+     fi
+     ;;

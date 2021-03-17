@@ -1,0 +1,18 @@
+--- IMG_ImageIO.m.old	2017-07-05 22:05:26.000000000 -0700
++++ IMG_ImageIO.m	2017-07-05 22:23:28.000000000 -0700
+@@ -334,11 +334,15 @@
+ static SDL_Surface* Create_SDL_Surface_From_CGImage(CGImageRef image_ref)
+ {
+     CGColorSpaceRef color_space = CGImageGetColorSpace(image_ref);
++#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1050 //kCGColorSpaceModelIndexed became available in 10.5
+     if (CGColorSpaceGetModel(color_space) == kCGColorSpaceModelIndexed) {
+         return Create_SDL_Surface_From_CGImage_Index(image_ref);
+     } else {
++#endif
+         return Create_SDL_Surface_From_CGImage_RGB(image_ref);
++#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1050
+     }
++#endif
+ }
+ 
+ 

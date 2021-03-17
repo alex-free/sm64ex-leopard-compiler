@@ -1,0 +1,143 @@
+PortSystem          1.0
+PortGroup           github 1.0
+
+name                scummvm
+platforms           darwin
+categories          emulators games
+maintainers         nomaintainer
+license             {GPL-2 BSD}
+description         cross-platform interpreter for several adventure engines
+long_description    \
+    ScummVM is a cross-platform interpreter for several point-and-click \
+    adventure engines. A current list of playable games is available at \
+    <https://www.scummvm.org/compatibility/>.
+
+homepage            https://www.scummvm.org
+
+if {${subport} eq ${name}} {
+    github.setup        scummvm scummvm 2.1.0 v
+    revision            1
+    checksums           sha256  6b50c6596a1536b52865f556dc05ded20f86b6ffabe4bccbd746b5587b15f727 \
+                        rmd160  0361156e76b9a1f0fd4541be0637dc888504091c \
+                        size    27188916
+
+    conflicts           ${name}-devel
+    long_description ${description}: \
+        This port follows the release version of ${name}, which is typically updated every \
+        6 months. If for some reason this port does not build or function as desired, try \
+        the ${name}-devel port.
+
+    master_sites        ${homepage}/frs/${name}/${version}
+    use_xz              yes
+
+    github.livecheck.regex {([0-9.]+)}
+}
+
+subport ${name}-devel {
+    github.setup        scummvm scummvm ccab85ffb2c735f65ddf8c688730b6d211c073f6
+    version             20191107
+    revision            1
+    checksums           rmd160  350934b943ae350553b0cd80fd1e19ba9d9d1733 \
+                        sha256  80ae31e59c9b32f0881b535c20c6166be441de2f55319d8909a6aa5f700bd0d2 \
+                        size    38357552
+
+    conflicts           ${name}
+    long_description ${description}: \
+        This port follows the master version of ${name}, which is typically updated every few weeks.
+
+    livecheck.type      none
+}
+
+patchfiles-append   patch-scummvm-sdl2indet.diff
+patchfiles-append   remove-date-time-from-version.patch
+
+depends_lib-append  port:libsdl2 \
+                    port:libsdl2_net \
+                    port:libmad \
+                    port:libogg \
+                    port:libvorbis \
+                    port:libpng \
+                    port:flac \
+                    port:libtheora \
+                    port:fluidsynth \
+                    port:faad2 \
+                    port:jpeg \
+                    port:freetype \
+                    port:bzip2 \
+                    port:curl \
+                    port:expat \
+                    port:gettext \
+                    path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:libedit \
+                    port:libffi \
+                    port:libiconv \
+                    port:libsndfile \
+                    port:ncurses \
+                    port:pcre \
+                    port:portaudio \
+                    port:readline \
+                    port:zlib
+
+configure.args-append  \
+                    --enable-release \
+                    --enable-plugins \
+                    --default-dynamic \
+                    --enable-sdlnet \
+                    --enable-cloud \
+                    --enable-libcurl \
+                    --enable-theoradec \
+                    --enable-jpeg \
+                    --enable-readline \
+                    --enable-all-engines \
+                    --enable-verbose-build
+
+# libcurl needs --enable-cloud as well otherwise link errors
+# also connected to --enable-sdlnet
+
+platform darwin powerpc {
+    patchfiles-delete     patch-scummvm-sdl2indet.diff
+    depends_lib-delete    port:libsdl2 
+    depends_lib-delete    port:libsdl2_net
+    depends_lib-append    port:libsdl
+    configure.args-delete --enable-sdlnet
+}
+
+if {[string match *clang* ${configure.cxx}]} {
+    configure.ldflags-append \
+                    -stdlib=${configure.cxx_stdlib}
+}
+
+compiler.cxx_standard   2011
+configure.args-append   --enable-c++11
+
+variant mpeg2 description {add mpeg2 support - has many dependencies} {
+     # this builds fine, but libmpeg2 is old (2008) and pulls in a lot of deps
+     # and I'm not sure if any games actually use this - make it optional
+     configure.args-append \
+                    --enable-mpeg2
+     depends_lib-append    \
+                    port:libmpeg2 \
+                    port:db48 \
+                    port:libsdl \
+                    port:libxml2 \
+                    path:lib/libssl.dylib:openssl \
+                    port:python27 \
+                    port:python2_select \
+                    port:python_select \
+                    port:sqlite3 \
+                    port:xorg-xorgproto \
+                    port:xorg-libX11 \
+                    port:xorg-libXau \
+                    port:xorg-libXdmcp \
+                    port:xorg-libXext \
+                    port:xorg-libXrandr \
+                    port:xorg-libXv \
+                    port:xorg-libice \
+                    port:xorg-libpthread-stubs \
+                    port:xorg-libsm \
+                    port:xorg-libxcb \
+                    port:xorg-xcb-proto \
+                    port:xrender \
+                    port:xz
+
+}

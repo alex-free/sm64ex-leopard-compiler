@@ -1,0 +1,50 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem      1.0
+
+name            libsdl2_image
+set my_name     SDL2_image
+version         2.0.1
+categories      devel graphics
+platforms       darwin
+license         zlib
+maintainers     {jmr @jmroot} openmaintainer
+description     Add on library for libSDL handling several image formats
+
+long_description \
+    This is a simple library to load images of various formats as SDL surfaces. \
+    This library supports BMP, PPM, PCX, GIF, JPEG, PNG, TGA, and TIFF formats.
+
+homepage        http://www.libsdl.org/projects/SDL_image/
+master_sites    ${homepage}release/
+distname        ${my_name}-${version}
+
+checksums       rmd160 d9ceaaa5f0e887b3d19986e4de6ef299f21c032b \
+                sha256 3a3eafbceea5125c04be585373bfd8b3a18f259bd7eae3efc4e6d8e60e0d7f64
+
+depends_build   port:pkgconfig
+depends_lib     port:libsdl2 \
+                port:libpng \
+                port:jpeg \
+                port:tiff \
+                port:zlib
+
+configure.args  --disable-sdltest \
+                --enable-jpg-shared=false \
+                --enable-png-shared=false \
+                --enable-tif-shared=false
+
+platform darwin 8 {
+    # one patch for Tiger
+    patchfiles-append patch-IMG_ImageIO-Tiger.diff
+}
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} CHANGES.txt COPYING.txt README.txt \
+        ${destroot}${docdir}
+}
+
+livecheck.type  regex
+livecheck.regex ${my_name}-(\\d+(?:\\.\\d+)*)

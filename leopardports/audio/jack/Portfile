@@ -1,0 +1,55 @@
+PortSystem      1.0
+
+name            jack
+version         0.124.1
+revision        2
+license         {GPL LGPL}
+distname        jack-audio-connection-kit-${version}
+
+categories      audio
+maintainers     nomaintainer
+description     Jack Audio Connection Kit
+long_description JACK is a low-latency audio server, written for \
+                POSIX conformant operating systems such as GNU/Linux \
+                and Apple's OS X.
+homepage        http://jackaudio.org/
+master_sites    http://jackaudio.org/downloads/
+
+platforms       darwin
+
+checksums       rmd160  075c6ce5342d31e359908c01d7123f20818021aa \
+                sha256  eb42df6065576f08feeeb60cb9355dce4eb53874534ad71534d7aa31bae561d6
+
+configure.cppflags-append -isystem${prefix}/include/db60
+configure.ldflags-append -L${prefix}/lib/db60
+
+configure.args  --enable-posix-shm \
+                --with-default-tmpdir=/tmp/
+
+patchfiles-append \
+    carbon.patch \
+    deploymenttarget.patch \
+    clock_nanosleep_check.patch
+
+platform darwin {
+    if {${os.major} >= 12} {
+        patchfiles-append mactypes.patch
+    }
+}
+
+depends_lib     port:db60 \
+                port:libxml2 \
+                port:libxslt \
+                port:zlib \
+                port:libsndfile \
+                port:libsamplerate \
+                port:readline
+
+depends_build   port:pkgconfig
+
+use_autoreconf  yes
+autoreconf.args -fvi
+
+livecheck.type  regex
+livecheck.url   [lindex ${master_sites} 0]
+livecheck.regex jack-audio-connection-kit-(0\\.\[0-9.\]+)${extract.suffix}

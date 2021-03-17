@@ -1,0 +1,20 @@
+--- native_midi/native_midi_macosx.c.old	2017-07-05 23:05:37.000000000 -0700
++++ native_midi/native_midi_macosx.c	2017-07-05 23:08:51.000000000 -0700
+@@ -197,16 +197,9 @@
+     #if MAC_OS_X_VERSION_MIN_REQUIRED < 1050
+     /* MusicSequenceLoadSMFData() (avail. in 10.2, no 64 bit) is
+      * equivalent to calling MusicSequenceLoadSMFDataWithFlags()
+-     * with a flags value of 0 (avail. in 10.3, avail. 64 bit).
+-     * So, we use MusicSequenceLoadSMFData() for powerpc versions
+-     * but the *WithFlags() on intel which require 10.4 anyway. */
+-    # if defined(__ppc__) || defined(__POWERPC__)
+-    if (MusicSequenceLoadSMFData(song->sequence, data) != noErr)
+-        goto fail;
+-    # else
++     * with a flags value of 0 (avail. in 10.3, avail. 64 bit). */
+     if (MusicSequenceLoadSMFDataWithFlags(retval->sequence, data, 0) != noErr)
+         goto fail;
+-    # endif
+     #else  /* MusicSequenceFileLoadData() requires 10.5 or later.  */
+     if (MusicSequenceFileLoadData(retval->sequence, data, 0, 0) != noErr)
+         goto fail;
